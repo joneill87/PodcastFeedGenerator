@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>FeedGen</h1>
+    <p class="lead">Generate and host feeds and mp3s for podcasts</p>
+</div>
+ 
+
+@if (Request.IsAuthenticated)
+{
+    <div class="row">
+        <h2>Things to Note</h2>
+        <div class="col-md-4">
+            <h2>Audio Files</h2>
+            <p>
+                Audio files must be in MP3 format. The application will allow you to attach any type of file, but it will most likely break if the file is anything other than MP3.
+                Worse still, it might not break, but start doing weird and unexpected stuff. If you want to be able to add non-MP3 audio files speak to Jack.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Categories</h2>
+            <p>
+                Categories should conform to the Apple Podcast Category list which you can find <a href="https://help.apple.com/itc/podcasts_connect/#/itc9267a2f12">here</a>.
+                This app allows categories to be added as free-form text; but will hopefully have dropdowns at some stage in the future. Apple allows sub-categories, but it's not directly supported.
+                Give Jack a shout if you want to add a subcategory and he'll drop it in to the database directly.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Artwork</h2>
+            <p>
+                Podcast feeds contain artwork that is a minimum size of 1400 x 1400 pixels and a maximum size of 3000 x 3000 pixels, 72 dpi, in JPEG or PNG format
+                with appropriate file extensions (.jpg, .png), and in the RGB colorspace. To optimize images for mobile devices, Apple recommends compressing your image files.
+            </p>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Specs</h2>
+                <p>
+                    Full specs and guides on how to add podcasts to the itunes store can be found <a href="https://itunespartner.apple.com/en/podcasts/overview#categories">here</a>.
+                </p>
+            </div>
+        </div>
+    
+        <p>Go to the @Html.ActionLink("Feed Definitions page", "Index", "FeedDefinitions", routeValues: null, htmlAttributes: null) to get started</p>
+    
+}
+else
+{
+    <div class="row">
+        <h2>Who Dat?</h2>
+        <p>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: null) to get started</p>
+    </div>
+} 

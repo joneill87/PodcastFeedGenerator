@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+}
+@using PodcastFeedGenerator.Models
+@model FeedDefinition
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:itunes="@Model.XMLNameSpace" version="2.0">
+    @foreach (var channel in Model.Channels)
+    {
+        @Html.Partial("Channel", channel)
+    }
+</rss>

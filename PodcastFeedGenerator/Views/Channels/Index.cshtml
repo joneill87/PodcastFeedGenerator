@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PodcastFeedGenerator.ViewModels.Channels.ChannelViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { feedDefinitionId = ViewBag.FeedDefinitionID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsExplicit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category3)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsExplicit)
+        </td>
+        <td>
+            <img src="@item.ImageURL" alt="channel icon" width="100px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category3)
+        </td>
+        <td>
+            @Html.ActionLink("Items", "Index", "Items", new { channelId = item.ID }, null) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Back to Feed Definitions", "Index", "FeedDefinitions")
+</p>

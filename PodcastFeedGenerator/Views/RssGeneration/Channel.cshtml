@@ -1,0 +1,48 @@
+﻿@using PodcastFeedGenerator.Models
+@model Channel
+
+
+<channel>
+
+    <title>@Model.Title</title>
+    <description>@Model.Description</description>
+    <link>@Model.WebsiteURL</link>
+    <language>@Model.Language</language>
+    <copyright>@Model.CopyrightNotice</copyright>
+    <lastBuildDate>@Model.LastBuildDate</lastBuildDate>
+    <pubDate>@Model.PublicationDate</pubDate>
+    <docs>@Model.DocumentationSource</docs>
+    <webMaster>@Model.WebmasterEmail</webMaster>
+
+    <itunes:author>@Model.Author</itunes:author>
+    <itunes:subtitle>@Model.SubTitle</itunes:subtitle>
+    <itunes:summary>@Model.Summary</itunes:summary>
+
+    <itunes:owner>
+        <itunes:name>@Model.OwnerName</itunes:name>
+        <itunes:email>@Model.OwnerEmail</itunes:email>
+    </itunes:owner>
+
+    <itunes:explicit>@(Model.IsExplicit ? "Yes" : "No")</itunes:explicit>
+
+    <itunes:image href="@Model.ImageURL" />
+
+    @foreach (var category in Model.AllCategories)
+    {
+        if (category.IsCompound)
+        {
+            <itunes:category text="@category.ParentCategory">
+                <itunes:category text="@category.Subcategory" />
+            </itunes:category>
+        }
+        else
+        {
+            <itunes:category text="@category.ParentCategory" />
+        }
+    }
+
+    @foreach (var item in Model.Items)
+    {
+        @Html.Partial("Item", item)
+    }
+</channel>

@@ -1,0 +1,41 @@
+﻿@using PodcastFeedGenerator.Models;
+@model Item
+
+<item>
+    <title>@Model.Title</title>
+    <link>@Model.URL </link>
+    <guid>@Model.FileURL</guid>
+    <description>
+        @Model.Description
+    </description>
+    <enclosure url="@Model.FileURL" length="@Model.FileSizeInBytes" type="@Model.MimeType" />
+    <category>@Model.PrimaryCategory.ParentCategory</category>
+    <pubDate>@Model.PublicationDate</pubDate>
+
+    <itunes:author>@Model.Author</itunes:author>
+
+    @foreach (var category in Model.AllCategories)
+    {
+        if (category.IsCompound)
+        {
+            <itunes:category text="@category.ParentCategory">
+                <itunes:category text="@category.Subcategory" />
+            </itunes:category>
+        }
+        else
+        {
+            <itunes:category text="@category.ParentCategory" />
+        }
+    }
+
+    <itunes:explicit>@(Model.IsExplicit ? "Yes" : "No")</itunes:explicit>
+    <itunes:subtitle>
+        @Model.SubTitle
+    </itunes:subtitle>
+    <itunes:summary>
+        @Model.Summary
+    </itunes:summary>
+    <itunes:duration>@(new TimeSpan(Model.LengthInSeconds * TimeSpan.TicksPerSecond))</itunes:duration>
+    <itunes:keywords>@Model.Keywords</itunes:keywords>
+
+</item>

@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Generate";
+}
+
+@model String
+
+<h2>Generate</h2>
+
+<p>Podcast feed successfully generated. Uploaded to <a href="@Model">@Model</a></p>
+
+<p>
+    @Html.ActionLink("Back to Feed Definitions", "Index", "FeedDefinitions")
+</p>
