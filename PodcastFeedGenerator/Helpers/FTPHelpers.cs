@@ -35,13 +35,13 @@ namespace PodcastFeedGenerator.Helpers
 
         public string UploadFeed(string feedContents)
         {
-            string filePath = "/files/feed.xml";
+            string filePath = "/files/goty.xml";
 
             var ftpClient = GetFtpClient();
             ftpClient.Connect();
 
             var fileBytes = System.Text.Encoding.UTF8.GetBytes(feedContents);
-            ftpClient.Upload(fileBytes, "feed.xml");
+            ftpClient.Upload(fileBytes, "goty.xml");
             return new Uri(webAccessibleURI, filePath).ToString();
         }
     }
